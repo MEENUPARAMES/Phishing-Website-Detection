@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PhishGuard</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+      color: #111;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 50px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      margin-left: 20px;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .github-btn {
+      background-color: #2979ff;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+
+    .hero {
+      padding: 80px 50px 30px;
+      text-align: left;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      margin: 0 0 20px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: #555;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .buttons a {
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: 600;
+    }
+
+    .check-now {
+      background-color: #2979ff;
+      color: white;
+    }
+
+    .learn-more {
+      border: 1px solid #ccc;
+      color: #111;
+      background: white;
+    }
+
+    .form-section {
+      background: #f9f9f9;
+      padding: 40px 50px;
+      margin-top: 40px;
+    }
+
+    .form-section h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .form-section input {
+      padding: 12px;
+      width: 300px;
+      font-size: 16px;
+      margin-right: 10px;
+    }
+
+    .form-section button {
+      padding: 12px 20px;
+      background-color: #2979ff;
+      color: white;
+      border: none;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .safe {
+      color: green;
+    }
+
+    .phishing {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div><strong>🚨 PhishGuard</strong></div>
+    <div>
+      <a href="#">Features</a>
+      <a href="#">How It Works</a>
+      <a href="#">About</a>
+      <a href="#" class="github-btn">GitHub ⧉</a>
+    </div>
+  </div>
+
+  <div class="hero">
+    <h1>Protect Yourself From Phishing Attacks</h1>
+    <p>Our advanced machine learning model detects phishing websites with 96.97% accuracy. Check any suspicious URL before you visit.</p>
+    <div class="buttons">
+      <a href="#" class="check-now">Check URL Now</a>
+      <a href="#" class="learn-more">Learn More</a>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <h2>URL Security Check</h2>
+    <p>Enter a URL to check if it's a potential phishing site</p>
+    <input id="urlInput" type="text" placeholder="Enter URL (e.g., https://example.com)" />
+    <button onclick="checkURL()">Check</button>
+    <div id="result" class="result"></div>
+  </div>
+
+  <script>
+    function checkURL() {
+      const url = document.getElementById('urlInput').value.trim();
+      const result = document.getElementById('result');
+
+      if (!url) {
+        result.innerHTML = "<span class='phishing'>❗ Please enter a valid URL.</span>";
+        return;
+      }
+
+      // ⚠️ MOCK LOGIC for demo — replace this with real API call later
+      const phishingKeywords = ["free", "win", "prize", "login", "secure", "paypal", "bank", "verification"];
+
+      let isPhishing = phishingKeywords.some(word => url.toLowerCase().includes(word));
+
+      if (isPhishing) {
+        result.innerHTML = "<span class='phishing'>🚨 Phishing Alert: This site is unsafe!</span>";
+      } else {
+        result.innerHTML = "<span class='safe'>✅ Legitimate: This site is safe to use.</span>";
+      }
+    }
+  </script>
+
+</body>
+</html>
