@@ -1,0 +1,8 @@
+@app.route("/predict", methods=["POST"])
+def predict():
+    url = request.form["url"]
+    features = extract_features(url)  # your function
+    prediction = model.predict([features])[0]
+
+    label = "Legitimate" if prediction == 0 else "Phishing"
+    return render_template("index.html", prediction=f"The URL is {label}")

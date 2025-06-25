@@ -1,22 +1,16 @@
-# app.py
-from flask import Flask, request, jsonify
-import joblib  # or pickle
-import re
+from flask import Flask, request, render_template
+from predict import predict_url
 
 app = Flask(__name__)
-model = joblib.load("phishing_model.pkl")  # Load your trained model
-vectorizer = joblib.load("vectorizer.pkl")  # Your vectorizer for the URL
 
-@app.route("/predict", methods=["POST"])
-def predict():
-    data = request.get_json()
-    url = data.get("url", "")
-    if not url:
-        return jsonify({"error": "URL is required"}), 400
+@app.route('/', methods=['GET', 'POST'])
+def home():
+    if request.method == 'POST':
+        url = request.form['url']
+        result = predict_url(url)
+        return render_template('index.html', prediction=result, url=url)
+    return render_template('index.html')
 
-    url_features = vectorizer.transform([url])
-    prediction = model.predict(url_features)[0]
-
-    result = "phishing" if prediction == 1 else "legitimate"
-    return jsonify({"result": result})
+if __name__ == '__main__':
+    app.run(debug=True)
 
